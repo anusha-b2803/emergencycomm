@@ -1,0 +1,18 @@
+/* Use theme variables instead of fixed colors */
+.login-container, .register-container, .admin-dashboard {
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--border);
+  transition: background 0.3s, color 0.3s;
+}
+
+input {
+  background: var(--input-bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+button {
+  background: var(--accent);
+  color: #fff;
+}

@@ -1,0 +1,348 @@
+/* ================================================================== */
+/*                 Base Styles (Default Light Mode)                   */
+/* ================================================================== */
+.chat-wrapper {
+  display: flex;
+  height: 100vh;
+  background-color: #f4f6f8;
+  color: #222;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background-color: #fff;
+  padding: 20px;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar h3 {
+  text-align: center;
+  margin-bottom: 15px;
+  color: #4b5eff;
+}
+
+/* Connection status */
+.connection-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 15px;
+  gap: 6px;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.status-dot.connected {
+  background-color: #4caf50;
+}
+
+.status-dot.disconnected {
+  background-color: #f44336;
+}
+
+/* User list */
+.user-list {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.user-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: 0.2s;
+}
+
+.user-item.active,
+.user-item:hover {
+  background-color: #e6f0ff;
+}
+
+.avatar {
+  font-size: 1.8rem;
+  margin-right: 10px;
+}
+
+.user-name {
+  font-weight: 600;
+}
+
+/* Chat container */
+.chat-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #fafafa;
+}
+
+/* Header */
+.chat-header {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.chat-avatar {
+  font-size: 2rem;
+  margin-right: 10px;
+}
+
+.conn-text {
+  font-size: 0.85rem;
+  margin-top: 3px;
+}
+
+.conn-text.connected {
+  color: #4caf50;
+}
+
+.conn-text.disconnected {
+  color: #f44336;
+}
+
+/* Messages */
+.chat-body {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  background-color: #f0f2f5; /* A slightly off-white like modern messengers */
+}
+
+.message {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.message.sent {
+  justify-content: flex-end;
+}
+
+.bubble {
+  background-color: #ffffff; /* Received bubbles are white */
+  padding: 10px 15px;
+  border-radius: 15px;
+  max-width: 60%;
+  animation: fadeIn 0.3s ease-in-out;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+}
+
+.message.sent .bubble {
+  background-color: #0084ff;
+  color: #fff;
+}
+
+.time {
+  display: block;
+  font-size: 0.75rem;
+  margin-top: 3px;
+  opacity: 0.8;
+  text-align: right;
+}
+
+/* Typing indicator */
+.typing-indicator {
+  text-align: left;
+  font-style: italic;
+  color: #555;
+  animation: blink 1.5s infinite;
+  margin-top: 8px;
+}
+
+/* Input area */
+.chat-input {
+  display: flex;
+  padding: 10px;
+  background-color: #fff;
+  border-top: 1px solid #ddd;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 0.95rem;
+}
+
+.chat-input button {
+  margin-left: 10px;
+  background-color: #0084ff;
+  border: none;
+  color: #fff;
+  border-radius: 8px;
+  padding: 0 15px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-size: 1.2rem;
+}
+
+.chat-input button:hover {
+  background-color: #006ce0;
+}
+
+.chat-input button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* No users / no chat */
+.no-users,
+.no-chat {
+  text-align: center;
+  margin-top: 50px;
+  color: #777;
+  font-style: italic;
+}
+
+/* Date separator */
+.date-separator {
+  text-align:center;
+  margin: 12px auto;
+  font-size:0.8rem;
+  color: #555;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: #e9eef8;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.04);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes blink {
+  50% { opacity: 0.6; }
+}
+
+
+/* ================================================================== */
+/*               Modern Dark Mode Overrides (High Specificity)        */
+/* ================================================================== */
+
+/* Main wrapper and sidebar background */
+.chat-wrapper.dark-mode {
+  background: #111b21;
+  color: #e9edef;
+}
+
+.chat-wrapper.dark-mode .sidebar {
+  background: #111b21;
+  color: #e9edef;
+}
+
+/* Overriding borders for a cleaner look */
+.chat-wrapper.dark-mode .sidebar,
+.chat-wrapper.dark-mode .chat-header,
+.chat-wrapper.dark-mode .chat-input {
+  border-color: #2a3942;
+}
+
+/* Sidebar active/hover state */
+.chat-wrapper.dark-mode .user-item.active,
+.chat-wrapper.dark-mode .user-item:hover {
+  background-color: #2a3942;
+}
+
+.chat-wrapper.dark-mode .sidebar h3 {
+  color: #0088ff;
+}
+
+/* Chat Header */
+.chat-wrapper.dark-mode .chat-header {
+  background-color: #202c33;
+}
+
+.chat-wrapper.dark-mode .chat-header h3 {
+  color: #e9edef;
+}
+
+/* Main chat background */
+.chat-wrapper.dark-mode .chat-body {
+  background-color: #0b141a;
+}
+
+/* Sent message bubble override for the modern look */
+.chat-wrapper.dark-mode .message.sent .bubble {
+  background: #005c4b;
+  color: #fff;
+}
+
+/* Received message bubble override */
+.chat-wrapper.dark-mode .message.received .bubble {
+  background: #202c33;
+  color: #e9edef;
+}
+
+/* Timestamp text color */
+.chat-wrapper.dark-mode .time {
+  color: #aebac1;
+}
+
+/* Chat input area */
+.chat-wrapper.dark-mode .chat-input {
+  background-color: #202c33;
+}
+
+.chat-wrapper.dark-mode .chat-input input {
+  background-color: #2a3942;
+  color: #e9edef;
+  border-color: transparent;
+}
+
+.chat-wrapper.dark-mode .chat-input input::placeholder {
+  color: #8696a0;
+}
+
+/* Send button styling */
+.chat-wrapper.dark-mode .chat-input button {
+  background-color: transparent;
+  color: #8696a0;
+  font-size: 1.5rem;
+}
+
+.chat-wrapper.dark-mode .chat-input button:hover {
+  background-color: transparent;
+  color: #e9edef;
+}
+
+.chat-wrapper.dark-mode .chat-input button:disabled {
+  background-color: transparent;
+  color: #54656f;
+}
+
+/* Placeholder text for when no chat is selected */
+.chat-wrapper.dark-mode .no-chat {
+  background-color: #0b141a;
+}
+.chat-wrapper.dark-mode .no-chat p {
+  color: #8696a0;
+}
+
+/* Typing indicator color */
+.chat-wrapper.dark-mode .typing-indicator {
+  color: #8696a0;
+}
+
+/* Date separator override */
+.chat-wrapper.dark-mode .date-separator {
+  background: #182229;
+  color: #aebac1;
+}
