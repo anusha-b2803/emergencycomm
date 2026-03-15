@@ -61,9 +61,15 @@ function ChatInterface({ currentUser, theme }) {
   useEffect(() => {
     let socket;
     const connectSocket = () => {
-      // Use deployed Render URL if available, fallback to localhost 5050.
-      // Must use wss:// for secure deployed connections.
-      const wsUrl = process.env.REACT_APP_WS_URL || "ws://localhost:5050";
+      let wsUrl = process.env.REACT_APP_WS_URL;
+      if (!wsUrl) {
+        if (window.location.hostname === "localhost") {
+          wsUrl = "ws://localhost:5050";
+        } else {
+          const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
+          wsUrl = `${protocol}//${window.location.host}`;
+        }
+      }
       socket = new WebSocket(wsUrl);
       socketRef.current = socket;
 

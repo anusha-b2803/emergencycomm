@@ -1,21 +1,26 @@
 // emergencycomm/bridge/server.js
 // Standalone WebSocket Server (ready for Render)
 
+const express = require('express');
 const http = require('http');
+const path = require('path');
 const WebSocket = require('ws');
 const { v4: uuidv4 } = require('uuid');
 
-// Render assigns a dynamic port via the PORT environment variable.
-// We use 5050 as the default local port instead of 5000 to avoid conflicts with other Windows/macOS services.
 const PORT = process.env.PORT || 5050;
 
-// Create standard HTTP server for health checks (Render requires this)
-const server = http.createServer((req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/plain' });
-  res.end('Bridge Server is active and ready for WebSocket connections.');
+const app = express();
+const server = http.createServer(app);
+
+// Serve the static React build folder in production
+app.use(express.static(path.join(__dirname, '../build')));
+
+// Catch-all route to serve React's index.html for client-side routing
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });
 
-// Attach WebSocket server to the HTTP server
+// Attach WebSocket server to the Express HTTP server
 const wss = new WebSocket.Server({ server });
 
 // Helper: send JSON on ws safely
