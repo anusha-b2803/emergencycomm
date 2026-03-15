@@ -15,8 +15,8 @@ const server = http.createServer(app);
 // Serve the static React build folder in production
 app.use(express.static(path.join(__dirname, '../build')));
 
-// Catch-all route to serve React's index.html for client-side routing
-app.get('*', (req, res) => {
+// Catch-all route to serve React's index.html for client-side routing (Express 5 compatible)
+app.get('/(.*)', (req, res) => {
   res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });
 
