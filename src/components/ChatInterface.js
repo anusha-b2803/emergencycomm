@@ -61,7 +61,10 @@ function ChatInterface({ currentUser, theme }) {
   useEffect(() => {
     let socket;
     const connectSocket = () => {
-      socket = new WebSocket("ws://localhost:5000");
+      // Use deployed Render URL if available, fallback to localhost 5050.
+      // Must use wss:// for secure deployed connections.
+      const wsUrl = process.env.REACT_APP_WS_URL || "ws://localhost:5050";
+      socket = new WebSocket(wsUrl);
       socketRef.current = socket;
 
       socket.onopen = () => {
@@ -254,9 +257,9 @@ function ChatInterface({ currentUser, theme }) {
                 value={newMessage}
                 onChange={handleInputChange}
                 placeholder="Type a message..."
-                disabled={!isConnected || sending}
+                disabled={sending}
               />
-              <button type="submit" disabled={!isConnected || sending || !newMessage.trim()}>
+              <button type="submit" disabled={sending || !newMessage.trim()}>
                 {sending ? "..." : "➤"}
               </button>
             </form>
